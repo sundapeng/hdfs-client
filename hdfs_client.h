@@ -8,14 +8,14 @@
 
 #include "command.h"
 
-class HdfsClient : public Command {
+class HdfsClient {
  public:
   HdfsClient();
   HdfsClient(const std::vector<std::string> &name_nodes);
   int setNameNodes(const std::vector<std::string> &name_nodes);
   int InitFs();
   int CopyToLocal(const std::string &hdfs_path, const std::string &save_path,
-                  int retry = 3);
+                  bool rename, int retry = 2);
 
   static std::string Tail(const std::string &url, int n);
 
@@ -28,6 +28,9 @@ class HdfsClient : public Command {
 
   void Init();
   hdfsFS Connect(const std::string &name_node);
+  int Create(const std::string &hdfs_path, const std::string &save_path);
+  int OverWrite(const std::string &hdfs_path, const std::string &save_path,
+                tObjectKind m_kind);
 
   // need to add valid json parser
   bool GetJsonValueStr(const std::string &json, const std::string &key,
