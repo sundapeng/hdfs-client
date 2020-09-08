@@ -6,11 +6,11 @@
 
 int main() {
   auto client =
-      HdfsClient(std::vector<std::string>{"name_node1, name_node2"});
+      HdfsClient(std::vector<std::string>{"emr-cluster"});
 
   client.CopyToLocal(
-      "/hdfs_path",
-      "/local_path");
+      "/apps",
+      "/root", false, 0);
 
   return 0;
 }
